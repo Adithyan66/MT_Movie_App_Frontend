@@ -35,27 +35,27 @@ const MovieCard = ({ movie, onFavorite }: MovieCardProps) => {
   const poster =
     movie.Poster && movie.Poster !== 'N/A'
       ? movie.Poster
-      : 'https://via.placeholder.com/300x450?text=No+Image'
+      : 'https://fetch.officechoice.com.au/Images/ProductImages/product-image-1.png'
 
   const isFavorite = movie.isFavorite ?? movie.isFavourite ?? false
 
   return (
-    <div className="group relative flex flex-col rounded-2xl border border-white/10 bg-white/5 p-3 text-white transition hover:border-white/30 hover:bg-white/10">
-      <div className="overflow-hidden rounded-xl">
+    <div className="group relative flex flex-col rounded-[28px] border border-white/10 bg-gradient-to-b from-black/70 via-zinc-900/60 to-black/80 p-4 text-white shadow-[0_20px_70px_rgba(0,0,0,0.65)] transition hover:border-white/30 hover:shadow-[0_30px_90px_rgba(0,0,0,0.75)]">
+      <div className="overflow-hidden rounded-2xl border border-white/5">
         <img
           src={poster}
           alt={movie.Title}
-          className="h-72 w-full object-cover transition duration-500 group-hover:scale-105"
+          className="h-72 w-full object-cover transition duration-700 group-hover:scale-110 group-hover:brightness-110"
           loading="lazy"
         />
       </div>
 
-      <div className="relative mt-4 flex flex-col gap-1 pr-12">
-        <p className="text-sm uppercase text-white/70">{movie.Type}</p>
+      <div className="relative mt-5 flex flex-col gap-1 pr-14">
+        <p className="text-xs uppercase tracking-[0.3em] text-white/60">{movie.Type}</p>
         <div ref={containerRef} className="overflow-hidden">
           <h3
             ref={titleRef}
-            className="text-lg font-semibold leading-tight whitespace-nowrap"
+            className="text-xl font-semibold leading-tight whitespace-nowrap text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
             style={
               shouldScroll
                 ? {
@@ -74,9 +74,15 @@ const MovieCard = ({ movie, onFavorite }: MovieCardProps) => {
         type="button"
         aria-label={isFavorite ? 'Remove from favourites' : 'Add to favourites'}
         onClick={() => onFavorite(movie)}
-        className="absolute right-4 bottom-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 transition group-hover:bg-black/70"
+        className="absolute right-4 bottom-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white shadow-[0_12px_30px_rgba(0,0,0,0.6)] transition hover:border-white/40 hover:bg-white/15"
       >
-        <FaHeart className={isFavorite ? 'text-pink-500 text-xl' : 'text-white text-xl'} />
+        <FaHeart
+          className={
+            isFavorite
+              ? 'text-red-500 text-xl drop-shadow-[0_0_18px_rgba(239,68,68,0.8)]'
+              : 'text-white text-xl'
+          }
+        />
       </button>
     </div>
   )
