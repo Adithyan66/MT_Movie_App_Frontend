@@ -81,13 +81,14 @@ export const useApp = () => {
     }
   }
 
-  const fetchFavorites = async (page: number = 1) => {
+  const fetchFavorites = async (page: number | undefined = 1) => {
+    const pageNumber = typeof page === 'number' ? page : 1
     setIsSearching(true)
     setHasSearched(true)
     setError(null)
     setIsFavoritesView(true)
     try {
-      const response = await movieApi.getFavorites(page)
+      const response = await movieApi.getFavorites(pageNumber)
       setMovies(
         response.movies.map((item) => ({
           ...item,

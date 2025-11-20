@@ -140,8 +140,9 @@ export const movieApi = {
 		return response.data;
 	},
 	getFavorites: async (page: number = 1): Promise<PaginatedMovieResponse> => {
+		const pageNumber = typeof page === 'number' ? page : Number(page) || 1
 		const response = await httpClient.get(API_ENDPOINTS.MOVIES.FAVORITES, {
-			params: { page },
+			params: { page: pageNumber },
 		});
 		return parseFavoriteMovies(response.data);
 	},

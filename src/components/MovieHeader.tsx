@@ -11,7 +11,7 @@ import useDebouncedCallback from '../hooks/useDebouncedCallback'
 interface MovieHeaderProps {
   onSearch: (criteria: MovieSearchCriteria) => Promise<void>
   isSearching: boolean
-  onShowFavorites: () => void
+  onShowFavorites: (page?: number) => void
 }
 
 const TYPE_OPTIONS: { value: MovieCategory; label: string }[] = [
@@ -121,7 +121,7 @@ const MovieHeader = ({ onSearch, isSearching, onShowFavorites }: MovieHeaderProp
           <button
             type="button"
             aria-label="Favourites"
-            onClick={onShowFavorites}
+            onClick={() => onShowFavorites()}
               className="group relative flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-gradient-to-b from-black to-zinc-900 shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition hover:border-white/60 hover:shadow-[0_20px_40px_rgba(0,0,0,0.65)] sm:h-12 sm:w-12"
           >
               <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 transition group-hover:opacity-100" />
