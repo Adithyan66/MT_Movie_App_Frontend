@@ -48,7 +48,7 @@ const MovieCard = ({ movie, onFavorite }: MovieCardProps) => {
   const handleImageError = () => {
     setPosterError(true)
   }
-
+//
   return (
     <div className="group relative flex flex-col rounded-[24px] border border-white/10 bg-gradient-to-b from-black/70 via-zinc-900/60 to-black/80 p-3 text-white shadow-[0_20px_70px_rgba(0,0,0,0.65)] transition hover:border-white/30 hover:shadow-[0_30px_90px_rgba(0,0,0,0.75)] sm:rounded-[28px] sm:p-4">
       <div className="relative h-56 overflow-hidden rounded-2xl border border-white/5 sm:h-72">
