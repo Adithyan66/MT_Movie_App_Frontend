@@ -61,22 +61,22 @@ const Pagination = ({ pagination, onPageChange, isLoading = false }: PaginationP
 	}
 
 	return (
-		<div className="mt-8 flex items-center justify-center gap-2">
+		<div className="mt-6 flex w-full flex-wrap items-center justify-center gap-2 text-white sm:mt-8">
 			<button
 				type="button"
 				onClick={handlePrevious}
 				disabled={isFirstPage || isLoading}
 				aria-label="Previous page"
-				className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 bg-white/5 text-white transition hover:border-white/40 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-white/20 disabled:hover:bg-white/5"
+				className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/20 bg-white/5 transition hover:border-white/40 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-white/20 disabled:hover:bg-white/5 sm:h-10 sm:w-10"
 			>
-				<FaChevronLeft className="text-sm" />
+				<FaChevronLeft className="text-xs sm:text-sm" />
 			</button>
 
-			<div className="flex items-center gap-1">
+			<div className="flex flex-wrap items-center justify-center gap-1">
 				{getVisiblePages().map((pageNum, index) => {
 					if (pageNum === '...') {
 						return (
-							<span key={`ellipsis-${index}`} className="px-2 text-white/60">
+							<span key={`ellipsis-${index}`} className="px-2 text-xs text-white/60 sm:text-sm">
 								...
 							</span>
 						)
@@ -93,7 +93,7 @@ const Pagination = ({ pagination, onPageChange, isLoading = false }: PaginationP
 							disabled={isLoading}
 							aria-label={`Go to page ${pageNumber}`}
 							aria-current={isActive ? 'page' : undefined}
-							className={`min-w-[40px] rounded-lg border px-3 py-2 text-sm font-medium transition ${
+								className={`min-w-[36px] rounded-lg border px-2.5 py-1.5 text-xs font-medium transition sm:min-w-[40px] sm:px-3 sm:py-2 sm:text-sm ${
 								isActive
 									? 'border-white/60 bg-white/20 text-white'
 									: 'border-white/20 bg-white/5 text-white/80 hover:border-white/40 hover:bg-white/10'
@@ -110,9 +110,9 @@ const Pagination = ({ pagination, onPageChange, isLoading = false }: PaginationP
 				onClick={handleNext}
 				disabled={isLastPage || isLoading}
 				aria-label="Next page"
-				className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 bg-white/5 text-white transition hover:border-white/40 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-white/20 disabled:hover:bg-white/5"
+				className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/20 bg-white/5 transition hover:border-white/40 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-white/20 disabled:hover:bg-white/5 sm:h-10 sm:w-10"
 			>
-				<FaChevronRight className="text-sm" />
+				<FaChevronRight className="text-xs sm:text-sm" />
 			</button>
 		</div>
 	)

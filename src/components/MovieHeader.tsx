@@ -85,34 +85,36 @@ const MovieHeader = ({ onSearch, isSearching, onShowFavorites }: MovieHeaderProp
 
 
   return (
-    <header className="relative w-full px-4 text-white">
-      <div className="absolute inset-0 -z-10 mx-auto h-64 w-[90%] max-w-4xl rounded-[36px]  border-white/10 bg-gradient-to-b from-black to-zinc-900 opacity-80 blur-3xl" />
-      <div className="mx-auto flex w-full flex-col items-center gap-6 rounded-[32px]  border-white/10 bg-gradient-to-b from-black/80 via-zinc-950/70 to-black/80 p-8 text-center shadow-[0_20px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl">
+    <header className="relative w-full px-3 pb-6 pt-4 text-white sm:px-4 md:pb-8">
+      <div className="absolute inset-0 -z-10 mx-auto h-60 w-[94%] max-w-4xl rounded-[32px] border-white/10 bg-gradient-to-b from-black to-zinc-900 opacity-70 blur-3xl sm:h-64 sm:rounded-[36px]" />
+      <div className="mx-auto flex w-full max-w-4xl flex-col items-center gap-5 rounded-[28px] border-white/10 bg-gradient-to-b from-black/85 via-zinc-950/70 to-black/80 p-6 text-center shadow-[0_20px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl sm:gap-6 sm:rounded-[32px] sm:p-8">
         <div className="flex flex-col items-center gap-2">
-          <p className="text-xs uppercase tracking-[0.4em] text-white/50">Immersive Black & White Cinema</p>
-          <h1 className="bg-gradient-to-r from-white via-zinc-200 to-white bg-clip-text text-4xl font-semibold uppercase tracking-[0.3em] text-transparent drop-shadow-[0_4px_25px_rgba(255,255,255,0.25)] transition-all duration-500 hover:tracking-[0.5em]">
+          <p className="text-[10px] uppercase tracking-[0.25em] text-white/50 sm:text-xs sm:tracking-[0.35em]">
+            Immersive Black & White Cinema
+          </p>
+          <h1 className="bg-gradient-to-r from-white via-zinc-200 to-white bg-clip-text text-[clamp(1.75rem,6vw,2.5rem)] font-semibold uppercase tracking-[0.18em] text-transparent drop-shadow-[0_4px_25px_rgba(255,255,255,0.25)] sm:text-4xl sm:tracking-[0.25em] md:tracking-[0.3em]">
             Movie Mania
           </h1>
         </div>
 
-        <div className="flex w-full max-w-2xl items-center justify-center gap-3" role="search">
-          <div className="relative flex-1">
+        <div className="flex w-full max-w-2xl flex-wrap items-center justify-center gap-2 sm:flex-nowrap sm:gap-3" role="search">
+          <div className="relative min-w-0 flex-1">
             <input
               type="search"
               placeholder="Search for a movie"
               value={searchQuery}
               onChange={(event) => handleChange(event.target.value)}
               aria-busy={isSearching}
-              className="w-full rounded-xl border border-white/10 bg-gradient-to-r from-black/60 to-zinc-900/60 px-5 py-3.5 pr-14 text-base text-white placeholder:text-white/50 shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/30"
+              className="w-full rounded-xl border border-white/10 bg-gradient-to-r from-black/60 to-zinc-900/60 px-4 py-2.5 pr-12 text-sm text-white placeholder:text-white/50 shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/30 sm:px-5 sm:py-3.5 sm:pr-14 sm:text-base"
             />
             <button
               type="button"
               aria-label="Toggle filters"
               aria-pressed={showFilters}
               onClick={() => setShowFilters((prev) => !prev)}
-              className="absolute right-4 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition hover:border-white/40 hover:bg-white/20"
+              className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition hover:border-white/40 hover:bg-white/20 sm:right-4 sm:h-9 sm:w-9"
             >
-              <FiFilter className="text-lg" />
+              <FiFilter className="text-base sm:text-lg" />
             </button>
           </div>
 
@@ -120,10 +122,10 @@ const MovieHeader = ({ onSearch, isSearching, onShowFavorites }: MovieHeaderProp
             type="button"
             aria-label="Favourites"
             onClick={onShowFavorites}
-              className="group relative flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-gradient-to-b from-black to-zinc-900 shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition hover:border-white/60 hover:shadow-[0_20px_40px_rgba(0,0,0,0.65)]"
+              className="group relative flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-gradient-to-b from-black to-zinc-900 shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition hover:border-white/60 hover:shadow-[0_20px_40px_rgba(0,0,0,0.65)] sm:h-12 sm:w-12"
           >
               <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 transition group-hover:opacity-100" />
-              <FaHeart className="text-2xl text-white transition group-hover:scale-110" />
+              <FaHeart className="text-xl text-white transition group-hover:scale-110 sm:text-2xl" />
           </button>
 
           {user ? (
@@ -132,7 +134,7 @@ const MovieHeader = ({ onSearch, isSearching, onShowFavorites }: MovieHeaderProp
                 type="button"
                 aria-label="User Profile"
                 onClick={() => setShowModal(true)}
-                className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition hover:border-white/60 hover:bg-white/10"
+                className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition hover:border-white/60 hover:bg-white/10 sm:h-12 sm:w-12"
               >
                 <img
                   src={user.profilePic}
@@ -151,42 +153,40 @@ const MovieHeader = ({ onSearch, isSearching, onShowFavorites }: MovieHeaderProp
               type="button"
               aria-label="Login"
               onClick={handleGoogleLogin}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-gradient-to-b from-black to-zinc-900 text-white shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition hover:border-white/60 hover:bg-white/10"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-gradient-to-b from-black to-zinc-900 text-white shadow-[0_10px_30px_rgba(0,0,0,0.45)] transition hover:border-white/60 hover:bg-white/10 sm:h-12 sm:w-12"
             >
-              <FaUser className="text-2xl text-white" />
+              <FaUser className="text-xl text-white sm:text-2xl" />
             </button>
           )}
         </div>
         {showFilters && (
-          <div className="flex w-full max-w-2xl flex-col gap-3 text-left">
-            <div className="flex flex-col gap-3 md:flex-row md:items-center">
-              <input
-                type="text"
-                inputMode="numeric"
-                placeholder="Year (e.g., 2015)"
-                value={yearFilter}
-                onChange={(event) => handleYearChange(event.target.value)}
-                className="w-full rounded-xl border border-white/15 bg-gradient-to-r from-black/70 to-zinc-900/70 px-4 py-3 text-white placeholder:text-white/50 shadow-[0_6px_20px_rgba(0,0,0,0.4)] transition focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/30 md:max-w-[200px]"
-              />
-              <div className="flex flex-1 flex-wrap gap-3">
-                {TYPE_OPTIONS.map((option) => {
-                  const isActive = typeFilter === option.value
-                  return (
-                    <button
-                      key={option.value}
-                      type="button"
-                      onClick={() => handleTypeSelect(option.value)}
-                      className={`min-w-[90px] rounded-xl border px-4 py-2 text-sm font-medium uppercase tracking-wide transition ${
-                        isActive
-                          ? 'border-white bg-white text-black shadow-[0_10px_30px_rgba(255,255,255,0.2)]'
-                          : 'border-white/20 bg-white/5 text-white hover:border-white/60 hover:bg-white/20'
-                      }`}
-                    >
-                      {option.label}
-                    </button>
-                  )
-                })}
-              </div>
+          <div className="flex w-full max-w-2xl flex-wrap items-center gap-1.5 text-left sm:gap-3">
+            <input
+              type="text"
+              inputMode="numeric"
+              placeholder="Year (e.g., 2015)"
+              value={yearFilter}
+              onChange={(event) => handleYearChange(event.target.value)}
+              className="h-9 min-w-[95px] flex-none rounded-xl border border-white/15 bg-gradient-to-r from-black/70 to-zinc-900/70 px-2.5 text-[11px] text-white placeholder:text-white/50 shadow-[0_6px_20px_rgba(0,0,0,0.4)] transition focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/30 sm:h-auto sm:px-4 sm:py-2.5 sm:text-sm md:max-w-[180px]"
+            />
+            <div className="flex flex-1 flex-nowrap items-stretch gap-1 sm:flex-wrap sm:gap-3">
+              {TYPE_OPTIONS.map((option) => {
+                const isActive = typeFilter === option.value
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => handleTypeSelect(option.value)}
+                    className={`flex-1 min-w-0 rounded-xl border px-2 py-1 text-[10px] font-semibold uppercase tracking-wide transition sm:flex-none sm:min-w-[90px] sm:px-4 sm:py-2 sm:text-sm ${
+                      isActive
+                        ? 'border-white bg-white text-black shadow-[0_10px_30px_rgba(255,255,255,0.2)]'
+                        : 'border-white/20 bg-white/5 text-white hover:border-white/60 hover:bg-white/20'
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                )
+              })}
             </div>
           </div>
         )}

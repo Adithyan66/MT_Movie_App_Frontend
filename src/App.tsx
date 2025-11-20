@@ -16,7 +16,7 @@ function App() {
   } = useApp()
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-start bg-gradient-to-b from-black to-zinc-900 px-4 py-10">
+    <div className="flex min-h-screen w-full flex-col items-center justify-start bg-gradient-to-b from-black to-zinc-900 px-3 py-6 sm:px-4 sm:py-10">
       <MovieHeader onSearch={searchMovies} isSearching={isSearching} onShowFavorites={fetchFavorites} />
       <MovieContainer
         movies={movies}
