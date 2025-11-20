@@ -11,6 +11,7 @@ import useDebouncedCallback from '../hooks/useDebouncedCallback'
 interface MovieHeaderProps {
   onSearch: (criteria: MovieSearchCriteria) => Promise<void>
   isSearching: boolean
+  onShowFavorites: () => void
 }
 
 const TYPE_OPTIONS: { value: MovieCategory; label: string }[] = [
@@ -19,7 +20,7 @@ const TYPE_OPTIONS: { value: MovieCategory; label: string }[] = [
   { value: 'episode', label: 'Episode' },
 ]
 
-const MovieHeader = ({ onSearch, isSearching }: MovieHeaderProps) => {
+const MovieHeader = ({ onSearch, isSearching, onShowFavorites }: MovieHeaderProps) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [showFilters, setShowFilters] = useState(false)
@@ -107,6 +108,7 @@ const MovieHeader = ({ onSearch, isSearching }: MovieHeaderProps) => {
           <button
             type="button"
             aria-label="Favourites"
+            onClick={onShowFavorites}
             className="flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/10 transition hover:border-white/60 hover:bg-white/20"
           >
             <FaHeart className="text-2xl text-pink-400" />

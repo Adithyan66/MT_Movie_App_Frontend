@@ -1,5 +1,6 @@
 import MovieCard from './MovieCard'
-import type { Movie } from '../types/movie'
+import Pagination from './Pagination'
+import type { Movie, PaginationInfo } from '../types/movie'
 
 interface MovieContainerProps {
   movies: Movie[]
@@ -7,6 +8,8 @@ interface MovieContainerProps {
   hasSearched: boolean
   error: string | null
   onFavorite: (movie: Movie) => void
+  pagination?: PaginationInfo | null
+  onPageChange?: (page: number) => void
 }
 
 const MovieContainer = ({
@@ -15,6 +18,8 @@ const MovieContainer = ({
   hasSearched,
   error,
   onFavorite,
+  pagination,
+  onPageChange,
 }: MovieContainerProps) => {
   if (!hasSearched) {
     return (
@@ -58,6 +63,9 @@ const MovieContainer = ({
           <MovieCard key={movie.imdbID} movie={movie} onFavorite={onFavorite} />
         ))}
       </div>
+      {pagination && onPageChange && (
+        <Pagination pagination={pagination} onPageChange={onPageChange} isLoading={isLoading} />
+      )}
     </section>
   )
 }

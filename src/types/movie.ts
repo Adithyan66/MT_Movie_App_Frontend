@@ -18,7 +18,8 @@ export interface MovieSearchResponse {
 	success: boolean;
 	message: string;
 	data: {
-		movies: MovieSearchResult;
+		movies: Movie[] | MovieSearchResult;
+		pagination?: PaginationInfo;
 	};
 }
 
@@ -35,6 +36,19 @@ export interface MovieSearchCriteria {
 	query: string;
 	year?: string;
 	type?: MovieCategory;
+	page?: number;
+}
+
+export interface PaginationInfo {
+	page: number;
+	perPage: number;
+	totalResults: number;
+	totalPages: number;
+}
+
+export interface PaginatedMovieResponse {
+	movies: Movie[];
+	pagination: PaginationInfo;
 }
 
 
