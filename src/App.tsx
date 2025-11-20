@@ -45,7 +45,13 @@ function App() {
         return
       }
       if (response.Response === 'True' && Array.isArray(response.Search)) {
-        setMovies(response.Search)
+        setMovies(
+          response.Search.map((item) => ({
+            ...item,
+            isFavorite: item.isFavorite ?? item.isFavourite ?? false,
+            isFavourite: item.isFavorite ?? item.isFavourite ?? false,
+          }))
+        )
       } else {
         setMovies([])
       }
@@ -80,7 +86,9 @@ function App() {
       const updated = await movieApi.toggleFavorite(movie.imdbID)
       setMovies((prev) =>
         prev.map((item) =>
-          item.imdbID === updated.imdbID ? { ...item, isFavorite: updated.isFavorite } : item
+          item.imdbID === updated.imdbID
+            ? { ...item, isFavorite: updated.isFavorite, isFavourite: updated.isFavorite }
+            : item
         )
       )
     } catch (error) {

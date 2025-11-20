@@ -1,6 +1,11 @@
 import httpClient from './httpClient';
 import { API_ENDPOINTS } from '../constants/api';
-import type { FavoriteResponse, MovieSearchResponse, MovieSearchCriteria } from '../types/movie';
+import type {
+	FavoriteResponse,
+	MovieSearchResponse,
+	MovieSearchResult,
+	MovieSearchCriteria,
+} from '../types/movie';
 
 export interface GoogleLoginResponse {
 	success: boolean;
@@ -26,12 +31,28 @@ export const authApi = {
 	},
 };
 
+const isWrappedMovieResponse = (
+	value: MovieSearchResponse | MovieSearchResult,
+): value is MovieSearchResponse => {
+	return (
+		typeof value === 'object' &&
+		value !== null &&
+		'data' in value &&
+		value.data !== undefined &&
+		'movies' in value.data
+	);
+};
+
 export const movieApi = {
-	search: async (params: MovieSearchCriteria): Promise<MovieSearchResponse> => {
+	search: async (params: MovieSearchCriteria): Promise<MovieSearchResult> => {
 		const response = await httpClient.get(API_ENDPOINTS.MOVIES.SEARCH, {
 			params,
 		});
-		return response.data;
+		const payload = response.data as MovieSearchResponse | MovieSearchResult;
+		if (isWrappedMovieResponse(payload)) {
+			return payload.data.movies;
+		}
+		return payload;
 	},
 	toggleFavorite: async (imdbID: string): Promise<FavoriteResponse> => {
 		const response = await httpClient.post(API_ENDPOINTS.MOVIES.FAVORITE, {

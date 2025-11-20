@@ -12,15 +12,17 @@ const MovieCard = ({ movie, onFavorite }: MovieCardProps) => {
       ? movie.Poster
       : 'https://via.placeholder.com/300x450?text=No+Image'
 
+  const isFavorite = movie.isFavorite ?? movie.isFavourite ?? false
+
   return (
     <div className="group relative flex flex-col rounded-2xl border border-white/10 bg-white/5 p-3 text-white transition hover:border-white/30 hover:bg-white/10">
       <button
         type="button"
-        aria-label={movie.isFavorite ? 'Remove from favourites' : 'Add to favourites'}
+        aria-label={isFavorite ? 'Remove from favourites' : 'Add to favourites'}
         onClick={() => onFavorite(movie)}
         className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 transition group-hover:bg-black/70"
       >
-        <FaHeart className={movie.isFavorite ? 'text-pink-500 text-xl' : 'text-white text-xl'} />
+        <FaHeart className={isFavorite ? 'text-pink-500 text-xl' : 'text-white text-xl'} />
       </button>
 
       <div className="overflow-hidden rounded-xl">

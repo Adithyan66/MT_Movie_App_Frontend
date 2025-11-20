@@ -5,12 +5,21 @@ export interface Movie {
 	Type: string;
 	Poster: string;
 	isFavorite?: boolean;
+	isFavourite?: boolean;
 }
 
-export interface MovieSearchResponse {
+export interface MovieSearchResult {
 	Search: Movie[];
 	totalResults: string;
 	Response: string;
+}
+
+export interface MovieSearchResponse {
+	success: boolean;
+	message: string;
+	data: {
+		movies: MovieSearchResult;
+	};
 }
 
 export interface FavoriteResponse {

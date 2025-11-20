@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from '../redux/hooks'
 import { googleLogin } from '../redux/slices/authSlice'
 import LogoutModal from './LogoutModal'
 import type { MovieCategory, MovieSearchCriteria } from '../types/movie'
+import useDebouncedCallback from '../hooks/useDebouncedCallback'
 
 interface MovieHeaderProps {
   onSearch: (criteria: MovieSearchCriteria) => Promise<void>
@@ -35,9 +36,20 @@ const MovieHeader = ({ onSearch, isSearching }: MovieHeaderProps) => {
     })
   }
 
+  const debouncedTriggerSearch = useDebouncedCallback(
+    (queryValue: string, yearValue: string, typeValue: MovieCategory | null) => {
+      triggerSearch(queryValue, yearValue, typeValue)
+    },
+    500
+  )
+
   const handleChange = (value: string) => {
     setSearchQuery(value)
-    triggerSearch(value, yearFilter, typeFilter)
+    if (!value.trim()) {
+      triggerSearch(value, yearFilter, typeFilter)
+      return
+    }
+    debouncedTriggerSearch(value, yearFilter, typeFilter)
   }
 
   const handleYearChange = (value: string) => {
