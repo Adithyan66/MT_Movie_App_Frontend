@@ -16,6 +16,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(var(--scroll-distance, 0));
+  }
+}
+
 
 
 

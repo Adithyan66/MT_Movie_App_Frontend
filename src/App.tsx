@@ -1,19 +1,14 @@
 import { useRef, useState } from 'react'
-import { useGoogleLogin } from '@react-oauth/google'
 import MovieHeader from './components/MovieHeader'
 import MovieContainer from './components/MovieContainer'
 import { movieApi } from './services/api'
 import type { Movie, MovieSearchCriteria } from './types/movie'
-import { useAppDispatch, useAppSelector } from './redux/hooks'
-import { googleLogin } from './redux/slices/authSlice'
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([])
   const [isSearching, setIsSearching] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [hasSearched, setHasSearched] = useState(false)
-  const user = useAppSelector((state) => state.auth.user)
-  const dispatch = useAppDispatch()
   const latestQueryRef = useRef('')
 
   const searchMovies = async ({ query, year, type }: MovieSearchCriteria) => {
@@ -67,28 +62,17 @@ function App() {
     }
   }
 
-  const googleLoginHandler = useGoogleLogin({
-    onSuccess: async (response) => {
-      try {
-        await dispatch(googleLogin(response.access_token)).unwrap()
-      } catch (error) {
-        console.error('Login failed:', error)
-      }
-    },
-  })
-
   const handleFavorite = async (movie: Movie) => {
-    if (!user) {
-      googleLoginHandler()
-      return
-    }
+    const currentlyFavorite = movie.isFavorite ?? movie.isFavourite ?? false
     try {
-      const updated = await movieApi.toggleFavorite(movie.imdbID)
+      const updated = currentlyFavorite
+        ? await movieApi.removeFavorite(movie.imdbID)
+        : await movieApi.addFavorite(movie.imdbID)
+      const nextState = updated.isFavorite ?? updated.isFavourite ?? !currentlyFavorite
+      const updatedId = updated.imdbID ?? updated.movieId ?? movie.imdbID
       setMovies((prev) =>
         prev.map((item) =>
-          item.imdbID === updated.imdbID
-            ? { ...item, isFavorite: updated.isFavorite, isFavourite: updated.isFavorite }
-            : item
+          item.imdbID === updatedId ? { ...item, isFavorite: nextState, isFavourite: nextState } : item
         )
       )
     } catch (error) {

@@ -54,9 +54,15 @@ export const movieApi = {
 		}
 		return payload;
 	},
-	toggleFavorite: async (imdbID: string): Promise<FavoriteResponse> => {
-		const response = await httpClient.post(API_ENDPOINTS.MOVIES.FAVORITE, {
-			imdbID,
+	addFavorite: async (movieId: string): Promise<FavoriteResponse> => {
+		const response = await httpClient.post(API_ENDPOINTS.MOVIES.FAVORITES, undefined, {
+			params: { movieId },
+		});
+		return response.data;
+	},
+	removeFavorite: async (movieId: string): Promise<FavoriteResponse> => {
+		const response = await httpClient.delete(API_ENDPOINTS.MOVIES.FAVORITES, {
+			params: { movieId },
 		});
 		return response.data;
 	},

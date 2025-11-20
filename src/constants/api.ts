@@ -5,8 +5,8 @@ export const API_ENDPOINTS = {
 		GOOGLE_CALLBACK: `${API_URL}/google/callback`,
 	},
 	MOVIES: {
-		SEARCH: `${API_URL}/movie/search`,
-		FAVORITE: `${API_URL}/movie/favoriate`,
+		SEARCH: `${API_URL}/movies/search`,
+		FAVORITES: `${API_URL}/movies/favorites`,
 	},
 } as const;
 

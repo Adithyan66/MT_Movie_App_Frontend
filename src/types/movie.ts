@@ -23,8 +23,10 @@ export interface MovieSearchResponse {
 }
 
 export interface FavoriteResponse {
-	imdbID: string;
-	isFavorite: boolean;
+	imdbID?: string;
+	movieId?: string;
+	isFavorite?: boolean;
+	isFavourite?: boolean;
 }
 
 export type MovieCategory = 'movie' | 'series' | 'episode';
