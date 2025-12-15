@@ -1,73 +1,98 @@
-# React + TypeScript + Vite
+# 🎬 Movie Mania App – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based frontend application for searching movies using the OMDB API and managing favourite movies. Built with performance, clarity, and real-world MERN practices in mind.
 
-Currently, two official plugins are available:
+🌐 **Live URL**: [https://movie.koodecode.online/](https://movie.koodecode.online/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 👤 Author
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Adithyan Binu**
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧠 Overview
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This frontend allows users to:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* Search for movies with a **debounced input**
+* View paginated results
+* Add or remove movies from favourites
+* Persist favourites using **Google Login**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+All external API communication is routed through the backend for security.
+
+---
+
+## 🔧 Tech Stack
+
+* React (Vite)
+* Redux (Global state management)
+* JavaScript
+* Custom React Hooks
+
+---
+
+## ✨ Features
+
+* 🔍 Debounced movie search
+* ❤️ Add / Remove favourite movies
+* 🔐 Google Login integration
+* 💾 Persist favourites across sessions
+* 📄 Pagination support
+* ⏳ Loading states
+* ⚠️ Graceful error handling
+
+---
+
+## 🧩 Key Highlights
+
+* Custom **debounce hook** to optimize API calls
+* Reusable and modular components
+* Clean and scalable folder structure
+* Backend API proxying (OMDB key never exposed)
+* Performance-focused rendering
+
+---
+
+## 📁 Environment Variables
+
+Create a `.env` file in the root directory:
+
+```
+VITE_API_URL=
+VITE_GOOGLE_CLIENT_ID=
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Running the Frontend Locally
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+npm install
+npm run dev
+```
+
+---
+
+## 🧪 Error Handling
+
+* Empty search results handled gracefully
+* User-friendly messages for API failures
+* Disabled actions during loading states
+
+---
+
+## 📌 Notes
+
+* Styling kept minimal to prioritize functionality
+* Designed for easy extension (profiles, watchlists, ratings)
+
+---
+
+## 🏁 Final Thoughts
+
+This frontend demonstrates practical React and Redux usage with real-world concerns like debouncing, API security, authentication, and performance optimization.
+
+Thanks for reviewing 🚀
